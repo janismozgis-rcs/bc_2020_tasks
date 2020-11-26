@@ -20,7 +20,12 @@ services:
       - "27020:27017"
     networks: 
       - task-network
+    volumes: 
+      - mongodb:/data/db
 
 networks:
   task-network:
     driver: bridge
+
+volumes:
+  mongodb:
