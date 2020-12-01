@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
 
         const comment = {
             id: Math.random().toString(36).substr(2, 36),
-            comment: req.body.taskId,
+            comment: req.body.comment,
             createdAt: new Date(),
         }
 
@@ -46,12 +46,17 @@ router.delete('/:commentId/:taskId', async (req, res) => {
         const query = Task.findById(req.params.taskId);
         const task = await query.exec();
 
-        let updatedComments = [];
-        for (let comment of task.comments) {
-            if (comment.id != req.params.commentId) {
-                updatedComments.push(comment);
-            }
-        }
+        // let updatedComments = [];
+        // for (let comment of task.comments) {
+        //     if (comment.id != req.params.commentId) {
+        //         updatedComments.push(comment);
+        //     }
+        // }
+
+        let updatedComments = task.comments.filter((comment) => {
+            return comment.id != req.params.commentId;
+        })
+
 
         task.comments = updatedComments;
 
