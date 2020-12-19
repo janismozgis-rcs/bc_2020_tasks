@@ -5,13 +5,14 @@ import taskRoutes from './routes/tasks.js';
 import labelRoutes from './routes/labels.js';
 import commentRouters from './routes/comments.js';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 dotenv.config();
 
 const app = express();
 
 app.use(bodyParser.json());
-
+app.use(cors);
 // register exteranl routes
 app.use('/tasks', taskRoutes);
 app.use('/labels', labelRoutes);
