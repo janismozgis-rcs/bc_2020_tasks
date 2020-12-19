@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 
 app.use(bodyParser.json());
-app.use(cors);
+app.use(cors());
 // register exteranl routes
 app.use('/tasks', taskRoutes);
 app.use('/labels', labelRoutes);
@@ -39,4 +39,6 @@ mongoose.connect(
     }
 );
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, () => {
+    console.log(`App is ready and listening on port ${process.env.PORT}`);
+});
